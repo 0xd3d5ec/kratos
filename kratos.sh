@@ -487,13 +487,21 @@ setup_zsh() {
 
   local zsh_dir="${ZSH:-$HOME/.oh-my-zsh}"
   local zsh_custom="${zsh_dir}/custom"
-  local theme_dir="${zsh_custom}/themes/kali-like-zsh-theme"
-  local theme_file="${theme_dir}/kali-like.zsh-theme"
+  local theme_repo_dir="${zsh_custom}/themes/kali-like-zsh-theme"
+  local theme_repo_file="${theme_repo_dir}/kali-like.zsh-theme"
+  local theme_file="${zsh_custom}/themes/kali-like.zsh-theme"
   local zshrc="$HOME/.zshrc"
 
   clone_if_missing "https://github.com/ohmyzsh/ohmyzsh.git" "$zsh_dir"
-  clone_if_missing "https://github.com/clamy54/kali-like-zsh-theme" "$theme_dir"
-  configure_kali_theme "$theme_file"
+  clone_if_missing "https://github.com/clamy54/kali-like-zsh-theme" "$theme_repo_dir"
+  configure_kali_theme "$theme_repo_file"
+
+  if [ "$DRY_RUN" -eq 1 ]; then
+    info "DRY-RUN: install Kali-like theme at ${theme_file}"
+  else
+    ln -sfn "$theme_repo_file" "$theme_file"
+    record_change "$theme_file"
+  fi
 
   clone_if_missing "https://github.com/zsh-users/zsh-autosuggestions" "${zsh_custom}/plugins/zsh-autosuggestions"
   clone_if_missing "https://github.com/zsh-users/zsh-syntax-highlighting" "${zsh_custom}/plugins/zsh-syntax-highlighting"
