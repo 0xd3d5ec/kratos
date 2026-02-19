@@ -1,3 +1,5 @@
+<img width="1633" height="333" alt="image" src="https://github.com/user-attachments/assets/633ac7fa-9d73-43ec-9337-7e575d140e53" />
+
 # Kratos
 
 Kratos is a Debian/Kali bootstrap repo focused on terminal productivity and machine setup.
